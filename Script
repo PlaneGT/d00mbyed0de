@@ -1,0 +1,113 @@
+-- GUI
+-- Version: 1.0
+
+-- Instances:
+
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local Skybox = Instance.new("TextButton")
+local DecalSpam = Instance.new("TextButton")
+local TextLabel = Instance.new("TextLabel")
+
+--Properties:
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderColor3 = Color3.fromRGB(8, 0, 255)
+Frame.Position = UDim2.new(0.0169491526, 0, 0.614321589, 0)
+Frame.Size = UDim2.new(0, 267, 0, 265)
+
+Skybox.Name = "Skybox"
+Skybox.Parent = Frame
+Skybox.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Skybox.BorderColor3 = Color3.fromRGB(43, 0, 255)
+Skybox.Position = UDim2.new(0.125145271, 0, 0.139622644, 0)
+Skybox.Size = UDim2.new(0, 200, 0, 50)
+Skybox.Font = Enum.Font.Unknown
+Skybox.Text = "Skybox"
+Skybox.TextColor3 = Color3.fromRGB(0, 34, 255)
+Skybox.TextSize = 14.000
+
+DecalSpam.Name = "DecalSpam"
+DecalSpam.Parent = Frame
+DecalSpam.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+DecalSpam.BorderColor3 = Color3.fromRGB(43, 0, 255)
+DecalSpam.Position = UDim2.new(0.125145271, 0, 0.403773576, 0)
+DecalSpam.Size = UDim2.new(0, 200, 0, 50)
+DecalSpam.Font = Enum.Font.Unknown
+DecalSpam.Text = "Decal Spam"
+DecalSpam.TextColor3 = Color3.fromRGB(0, 34, 255)
+DecalSpam.TextSize = 14.000
+
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(0, 0, 0.667924523, 0)
+TextLabel.Size = UDim2.new(0, 267, 0, 88)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "d00mbyed0de GUI"
+TextLabel.TextColor3 = Color3.fromRGB(0, 17, 255)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+TextLabel.TextWrapped = true
+
+-- Scripts:
+
+local function NMFIUBD_fake_script() -- Skybox.LocalScript 
+	local script = Instance.new('LocalScript', Skybox)
+
+	local button = script.Parent
+	local Lighting = game:GetService("Lighting")
+	
+	local skyboxId = "rbxassetid://129158678096507"
+	
+	button.MouseButton1Click:Connect(function()
+		
+		local existingSky = Lighting:FindFirstChildOfClass("Sky")
+		if existingSky then
+			existingSky:Destroy()
+		end
+	
+		
+		local sky = Instance.new("Sky")
+		sky.Name = "CustomSky"
+		sky.SkyboxBk = skyboxId
+		sky.SkyboxDn = skyboxId
+		sky.SkyboxFt = skyboxId
+		sky.SkyboxLf = skyboxId
+		sky.SkyboxRt = skyboxId
+		sky.SkyboxUp = skyboxId
+		sky.Parent = Lighting
+	end)
+	
+end
+coroutine.wrap(NMFIUBD_fake_script)()
+local function URLWY_fake_script() -- DecalSpam.LocalScript 
+	local script = Instance.new('LocalScript', DecalSpam)
+
+	local button = script.Parent
+	local decalId = "rbxassetid://129158678096507"
+	local Workspace = game:GetService("Workspace")
+	
+	button.MouseButton1Click:Connect(function()
+		for _, obj in ipairs(Workspace:GetDescendants()) do
+			if obj:IsA("BasePart") and not obj:IsDescendantOf(game.Players) then
+				
+				local faces = {"Top", "Bottom", "Front", "Back", "Left", "Right"}
+				for _, face in ipairs(faces) do
+					local decal = Instance.new("Decal")
+					decal.Texture = decalId
+					decal.Face = Enum.NormalId[face]
+					decal.Parent = obj
+				end
+			end
+		end
+	end)
+	
+end
+coroutine.wrap(URLWY_fake_script)()
